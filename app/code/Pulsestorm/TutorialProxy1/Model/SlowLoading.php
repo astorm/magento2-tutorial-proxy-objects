@@ -8,4 +8,9 @@ class SlowLoading
         //simulate slow loading object with sleep
         sleep(3);
     }
+    
+    public function hello()
+    {
+        echo "Hello","\n";
+    }    
 }

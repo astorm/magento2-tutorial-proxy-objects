@@ -31,16 +31,41 @@ class Testbed extends Command
     {
         $output->writeln("Hello World");  
         
-        $om = $this->getObjectManager();
+        $service = $this->createService($output);
         
-        
+        $this->sayHelloWithFastObject($service, $output);
+        $this->sayHelloWithSlowObject($service, $output);
+    }
+    
+    protected function sayHelloWithFastObject($service, $output)
+    {
+        $output->writeln("About to say hello with fast object");
+        $time = microtime(true);
+        $service->sayHelloWithFastObject();
+        $to_run = microtime(true) - $time;
+        $output->writeln("Said hello with fast object, approximate time to load: " . round(($to_run*1000),4) . ' ms');
+        $output->writeln('');
+    }
+    
+    protected function sayHelloWithSlowObject($service, $output)
+    {
+        $time = microtime(true);
+        $output->writeln("About to say hello with slow object");    
+        $service->sayHelloWithSlowObject();
+        $to_run = microtime(true) - $time;
+        $output->writeln("Said hello with slow object, approximate time to load: " . round(($to_run * 1000),4) . ' ms');
+        $output->writeln('');
+    }
+    
+    protected function createService($output)
+    {
         $output->writeln("About to Create Service");
+        $om = $this->getObjectManager();
         $time = microtime(true);
         $service = $om->get('Pulsestorm\TutorialProxy1\Model\Example');
         $to_load = microtime(true) - $time;
-        $output->writeln("Created Service, aproximate time to load: " . round($to_load, 4) . ' seconds');
-        
-        
-        
+        $output->writeln("Created Service, aproximate time to load: " . round(($to_load*1000),4) . ' ms');        
+        $output->writeln('');
+        return $service;    
     }
 } 

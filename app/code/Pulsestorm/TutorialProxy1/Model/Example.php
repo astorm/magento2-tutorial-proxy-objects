@@ -9,4 +9,14 @@ class Example
         $this->fast = $fast;
         $this->slow = $slow;
     }
+    
+    public function sayHelloWithFastObject()
+    {
+        $this->fast->hello();
+    }
+    
+    public function sayHelloWithSlowObject()
+    {
+        $this->slow->hello();
+    }    
 }
