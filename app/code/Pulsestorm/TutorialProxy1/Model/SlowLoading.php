@@ -12,5 +12,10 @@ class SlowLoading
     public function hello()
     {
         echo "Hello","\n";
+    }
+    
+    public function goodbye()
+    {
+        echo "Goodbye","\n";
     }    
 }

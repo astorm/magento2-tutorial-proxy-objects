@@ -18,5 +18,5 @@ class Example
     public function sayHelloWithSlowObject()
     {
         $this->slow->hello();
-    }    
+    }  
 }

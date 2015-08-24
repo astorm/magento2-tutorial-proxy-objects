@@ -29,12 +29,23 @@ class Testbed extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln("Hello World");  
-        
-        $service = $this->createService($output);
-        
-        $this->sayHelloWithFastObject($service, $output);
-        $this->sayHelloWithSlowObject($service, $output);
+        $this->installedCheck($output);
+        // $service = $this->createService($output);        
+        // $this->sayHelloWithFastObject($service, $output);
+        // $this->sayHelloWithSlowObject($service, $output);
+    }
+    
+    protected function installedCheck($output)
+    {
+        $output->writeln("You've installed Pulsestorm_TutorialProxy2!");          
+        if(true)
+        {
+            $output->writeln("You've also installed Pulsestorm_TutorialProxy1!");          
+        }
+        else
+        {
+            $output->writeln("Error: could not find Pulsestorm_TutorialProxy1!");                  
+        }
     }
     
     protected function sayHelloWithFastObject($service, $output)
@@ -64,7 +75,7 @@ class Testbed extends Command
         $time = microtime(true);
         $service = $om->get('Pulsestorm\TutorialProxy1\Model\Example');
         $to_load = microtime(true) - $time;
-        $output->writeln("Created Service, aproximate time to load: " . round(($to_load*1000),4) . ' ms');        
+        $output->writeln("Created Service, approximate time to load: " . round(($to_load*1000),4) . ' ms');        
         $output->writeln('');
         return $service;    
     }
